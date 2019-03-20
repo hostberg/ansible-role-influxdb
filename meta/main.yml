@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: influxdb
   author: Matvey Mikhaylov
   description: InfluxDB - open-source time series database
   license: MIT
