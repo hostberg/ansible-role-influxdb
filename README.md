@@ -1,5 +1,8 @@
-Role Name
+# Ansible Role: InfluxDB
+
 =========
+
+[![Build Status](https://travis-ci.org/hostberg/ansible-role-influxdb.svg?branch=master)](https://travis-ci.org/hostberg/ansible-role-influxdb)
 
 A brief description of the role goes here.
 
@@ -30,7 +33,7 @@ Including an example of how to use your role (for instance, with variables passe
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
