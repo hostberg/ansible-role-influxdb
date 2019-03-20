@@ -1,0 +1,3 @@
+---
+influxdb_package: "influxdb{{ (influxdb_version != 'latest') | ternary('-' ~ influxdb_version, '') }}"
+influxdb_dependencies: []

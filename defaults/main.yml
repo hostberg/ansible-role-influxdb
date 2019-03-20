@@ -1,0 +1,15 @@
+---
+influxdb_version: latest
+influxdb_yum_repo_template: etc/yum.repos.d/influxdb.repo.j2
+
+influxdb_databases: []
+
+influxdb_users: []
+
+influxdb_privileges: []
+
+influxdb_influx_bin: /usr/bin/influx
+
+influxdb_config_file: /etc/influxdb/influxdb.conf
+influxdb_config_template: config/base.conf.j2
+influxdb_config: []

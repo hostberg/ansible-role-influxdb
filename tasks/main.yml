@@ -1,0 +1,34 @@
+---
+- name: Gather variables for each operating system
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+
+- include: install.yml
+  tags:
+    - influxdb
+
+- include: config.yml
+  tags:
+    - influxdb
+
+- include: services.yml
+  tags:
+    - influxdb
+    - influxdb.services
+
+- include: databases.yml
+  tags:
+    - influxdb
+
+- include: users.yml
+  tags:
+    - influxdb
+
+- include: privileges.yml
+  tags:
+    - influxdb

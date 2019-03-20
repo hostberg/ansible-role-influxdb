@@ -1,0 +1,7 @@
+---
+- name: InfluxDB Service
+  service:
+    name: "{{ item }}"
+    state: started
+  with_items:
+    - influxdb
