@@ -1,7 +1,7 @@
 ---
 - name: InfluxDB Service
-  service:
-    name: "{{ item }}"
+  systemd:
+    name: influxdb
+    enabled: true
     state: started
-  with_items:
-    - influxdb
+    daemon_reload: true
