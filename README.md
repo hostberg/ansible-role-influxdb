@@ -1,20 +1,75 @@
 # Ansible Role: InfluxDB
 
-=========
-
 [![Build Status](https://travis-ci.org/hostberg/ansible-role-influxdb.svg?branch=master)](https://travis-ci.org/hostberg/ansible-role-influxdb)
-
-A brief description of the role goes here.
+[![License](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)](https://opensource.org/licenses/MIT)
+[![Ansible Role](https://img.shields.io/badge/ansible%20role-hostberg.influxdb-blue.svg)](https://galaxy.ansible.com/hostberg/influxdb/)
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+None
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+| Name                                       | Default                       | Type   | Description                                    |
+| ------------------------------------------ | ----------------------------- | ------ | ---------------------------------------------- |
+| `influxdb_databases`                | []                                | Array  | Databases                                      |
+| `influxdb_users`                    | []                                | Array  | Users                                          |
+| `influxdb_privileges`               | []                                | Array  | Privileges                                     |
+| `influxdb_config`                   | []                                | Array  | Configuration                                  |
+| `influxdb_config_file`              | '/etc/influxdb/influxdb.conf'     | String | Configuration file path                        |
+| `influxdb_config_template`          | 'config/base.conf.j2'             | String | Configuration template path                    |
+| `influx_yum_repo_template`          | 'etc/yum.repos.d/influxdb.repo.j2' | String | Yum template to use
+
+Use a custom InfluxDB Yum repo template example:
+
+* Put your template next to your playbook under `templates` folder
+* Use a different path than the default one, because ansible , when using relative path, use the first template found and look under the role directory at first then the playbook directory
+* The template expansion will be put under  `/etc/yum.repos.d/` , and will have as a name, the `basename` of the template path without the .j2
+
+  Example:
+
+  ```yaml
+  influxdb_yum_repo_template: my_yum_repos/influxdb.repo.j2
+
+  # [playbook_dir]/templates/my_yum_repos/influxdb.repo.j2
+  # will be put under
+  # /etc/yum.repos.d/influxdb.repo
+  # on the remote host
+  ```
+
+### Configuration example
+
+```yaml
+############
+# InfluxDB #
+############
+
+influxdb_databases:
+  - my_db
+
+influxdb_users:
+  - database: my_db
+    name:     my_user
+    password: my_password
+
+influxdb_privileges:
+  - database: my_db
+    user:     my_user
+    grant:    ALL
+
+influxdb_config:
+  - reporting-disabled: true
+  - udp:
+    - enabled: true
+    - bind-address: :8089
+    - database: stats
+    - batch-size: 5000
+    - batch-timeout: 1s
+    - batch-pending: 10
+    - read-buffer: 0
+```
 
 Dependencies
 ------------
@@ -28,7 +83,7 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: hostberg.influxdb }
 
 License
 -------
