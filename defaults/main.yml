@@ -4,6 +4,8 @@ influxdb_yum_repo_template: etc/yum.repos.d/influxdb.repo.j2
 
 influxdb_databases: []
 
+influxdb_admins: []
+
 influxdb_users: []
 
 influxdb_privileges: []
