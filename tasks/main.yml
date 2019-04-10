@@ -12,14 +12,18 @@
   tags:
     - influxdb
 
-- include: config.yml
-  tags:
-    - influxdb
-
 - include: services.yml
   tags:
     - influxdb
     - influxdb.services
+
+- include: admins.yml
+  tags:
+    - influxdb
+
+- include: config.yml
+  tags:
+    - influxdb
 
 - include: databases.yml
   tags:
