@@ -1,7 +1,6 @@
 ---
 - name: Create InfluxDB users
-  command: >
-    "{{ influxdb_influx_bin }} -database '{{ item.database }}' -execute
-    \"CREATE USER {{ item.name }} WITH PASSWORD '{{ item.password }}'\""
+  command: "{{ influxdb_influx_bin }} -database '{{ item.database }}' \
+    -execute \"CREATE USER {{ item.name }} WITH PASSWORD '{{ item.password }}'\""
   with_items: "{{ influxdb_users }}"
   changed_when: false

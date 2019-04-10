@@ -1,7 +1,6 @@
 ---
 - name: Setup InfluxDB privileges
-  command: >
-    "{{ influxdb_influx_bin }} -execute
+  command: "{{ influxdb_influx_bin }} -execute \
     'GRANT {{ item.grant }} ON \"{{ item.database }}\" TO \"{{ item.user }}\"'"
   with_items: "{{ influxdb_privileges }}"
   changed_when: false
