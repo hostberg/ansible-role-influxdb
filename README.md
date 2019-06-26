@@ -20,7 +20,7 @@ Role Variables
 | `influxdb_config`                   | []                                | Array  | Configuration                                  |
 | `influxdb_config_file`              | '/etc/influxdb/influxdb.conf'     | String | Configuration file path                        |
 | `influxdb_config_template`          | 'config/base.conf.j2'             | String | Configuration template path                    |
-| `influx_yum_repo_template`          | 'etc/yum.repos.d/influxdb.repo.j2' | String | Yum template to use
+| `influxdb_yum_repo_template`          | 'etc/yum.repos.d/influxdb.repo.j2' | String | Yum template to use
 
 Use a custom InfluxDB Yum repo template example:
 
